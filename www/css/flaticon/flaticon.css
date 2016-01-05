@@ -1,0 +1,109 @@
+@font-face {
+	font-family: "Flaticon";
+	src: url("flaticon.eot");
+	src: url("flaticon.eot#iefix") format("embedded-opentype"),
+	url("flaticon.woff") format("woff"),
+	url("flaticon.ttf") format("truetype"),
+	url("flaticon.svg") format("svg");
+	font-weight: normal;
+	font-style: normal;
+}
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before,
+[class^="flaticon-"]:after, [class*=" flaticon-"]:after {   
+	font-family: Flaticon;
+        font-size: 20px;
+font-style: normal;
+margin-left: 20px;
+}.flaticon-back:before {
+	content: "\e000";
+    font-size: 25px;
+}
+.flaticon-balloons-b:before {
+	content: "\e001";
+    font-size: 100px;
+}
+.flaticon-catalog-b:before {
+	content: "\e002";
+    font-size: 100px;
+}
+.flaticon-leftarrow:before {
+	content: "\e003";
+    font-size: 25px;
+}
+.flaticon-menu:before {
+	content: "\e004";
+    font-size: 25px;
+}
+.flaticon-offer-b:before {
+	content: "\e005";
+    font-size: 100px;
+}
+.flaticon-shop:before {
+	content: "\e006";
+    font-size: 25px;
+}
+.flaticon-party-b:before {
+	content: "\e007";
+    font-size: 100px;
+}
+.flaticon-question-b:before {
+	content: "\e008";
+    font-size: 100px;
+}
+.flaticon-thinking-b:before {
+	content: "\e009";
+    font-size: 100px;
+}
+
+
+
+.flaticon-balloons-icon:before {
+	content: "\e001";
+    font-size: 2em;
+}
+.flaticon-catalog-icon:before {
+	content: "\e002";
+    font-size: 2em;
+}
+.flaticon-offer-icon:before {
+	content: "\e005";
+    font-size: 2em;
+}
+.flaticon-party-icon:before {
+	content: "\e007";
+    font-size: 2em;
+}
+.flaticon-question-icon:before {
+	content: "\e008";
+    font-size: 2em;
+}
+.flaticon-thinking-icon:before {
+	content: "\e009";
+    font-size: 2em;
+}
+
+.flaticon-balloons-h:before {
+	content: "\e001";
+    font-size: 18em;
+}
+.flaticon-catalog-h:before {
+	content: "\e002";
+    font-size: 18em;
+}
+.flaticon-offer-h:before {
+	content: "\e005";
+    font-size: 18em;
+}
+.flaticon-party-h:before {
+	content: "\e007";
+    font-size: 18em;
+}
+.flaticon-question-h:before {
+	content: "\e008";
+    font-size: 18em;
+}
+.flaticon-thinking-h:before {
+	content: "\e009";
+    font-size: 18em;
+}
+

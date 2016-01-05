@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+
+<head>
+
+    <title>Party Fiesta</title>
+    <meta name="viewport" content="width=device-width, height=device-height,user-scalable=yes" charset="utf-8">
+
+    <script src="js/cordova.js"></script>
+    <script src="lib/jquery-2.1.4.min.js"></script>
+    <script src="lib/jquery.mobile-1.4.5.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    
+    
+    <script src="lib/phonegap-print-master/www/PrintPlugin.js"></script>
+
+    <link rel="stylesheet" href="lib/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="css/themes/PartyFiesta.css" />
+    <link rel="stylesheet" href="css/themes/jquery.mobile.icons.min.css" />
+    <link rel="stylesheet" href="css/flaticon/flaticon.css" />
+    <link rel="stylesheet" href="css/estilos.css" />
+    <link rel="stylesheet" href="lib/all-animation.min.css" />
+    <link rel="stylesheet" href="css/swiper.min.css">
+
+    <!-- SCRIPTS NUESTROS -->
+    <script src="js/app.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/rest.js"></script>
+    <script src="js/display.js"></script>
+    <script src="js/functions.js"></script>
+    <script src="idiomas/translateApp.js"></script>
+
+</head>
+
+<style>
+    @font-face {
+        font-family: "font";
+        src: url("http://partyfiesta.youtter.com/app/alb/css/fonts/font.ttf");
+        font-weight: normal;
+        font-style: normal;
+    }
+    * {
+        font-family: "font";
+    }
+    body {
+        font-family: "font";
+    }
+    .ui-select > .ui-btn {
+        background: #29C0FF !important;
+    }
+    ui-select-active {
+        color: #ffffff !important;
+        text-shadow: 0 -1px 1px #ffffff;
+    }
+    #popupListItems-popup {
+        top: 20% !important;
+        right: 20% !important;
+        left: 20% !important;
+        width: 60% !important;
+        top: 15% !important;
+    }
+    #popupListItems-screen {
+        opacity: .7;
+        background-color: rgb(0, 0, 0);
+    }
+    #popupCargando-popup {
+        right: 0% !important;
+        left: 0% !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        max-width: none !important;
+        max-height: none !important;
+    }
+    .colorText::-webkit-input-placeholder {
+        color: red;
+    }
+    /*::-webkit-input-placeholder {
+        color: red;
+    }*/
+    .thumb {
+        max-width: 50px;
+        max-height: 50px;
+    }
+    .imgMedium {
+        max-width: 300px;
+        max-height: 300px;
+    }
+</style>
+
+<!-- Demo styles -->
+<style>
+    .swiper-container {
+        width: 100%;
+        height: 100px;
+        margin: 10px auto;
+    }
+    .swiper-slide {
+        text-align: center;
+        font-size: 18px;
+        background: #fff;
+        width: 60%;
+        /* Center slide text vertically */
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        -webkit-justify-content: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+    }
+    .swiper-slide:nth-child(2n) {
+        width: 40%;
+    }
+    .swiper-slide:nth-child(3n) {
+        width: 20%;
+    }
+    .border-header {
+        border-bottom: solid 1px rgb(52, 127, 188);
+    }
+</style>
+
+<body>
+
+    <!-- DIV DE SCREENSAVER -->
+    <div id="contentPopupScreenSaver" style="display:none">
+        <img src="img/salvapantallas.png" class="ui-li-icon ui-corner-none" style="height: 100vh;width: 100%;">
+    </div>
+
+    <div data-role="page" id="principal" role="main">
+
+        <!--     HEADER    -->
+        <div data-role="header" id="divHeader" data-position="fixed" data-tap-toggle="false" style="border-style:none;min-height:17%;">
+            <div id="divHeader_menu"></div>
+            <div id="divHeader_catalogo"></div>
+        </div>
+
+        <!--     CONTENT    -->
+        <div data-role="content" id="content_page" data-tap-toggle="false" style="">
+            <!-- max-height:70% -->
+
+            <div id="divTienda" align="center" style="padding-top: 5%;">
+
+                <div class="dance" id="logo_inicio" style="margin-bottom:20px;width: 25%;">
+                    <img src="css/icons/logo.png" style="width: 100%;">
+                </div>
+
+                <div>
+                    <label id="labelInicio">Seleccione una tienda:</label>
+                </div>
+                <div id="div_select_tienda" data-theme="f" style="width: 25%;color: white">
+                </div>
+                <div class="ui-grid-c" style="width: 25%">
+                    <button data-theme="b" id="btn_acceder" data-corners="false" style="border: 0px;text-transform: uppercase;font-size: 20px;">Acceder</button>
+                </div>
+
+            </div>
+
+            <div data-role="panel" id="lateralMenu" data-display="overlay" data-position="right" style="heigth:100%">
+                <div style="margin-bottom: 7%;"><strong>Menú</strong>
+                </div>
+                <ul data-role="listview" id="options">
+                </ul>
+            </div>
+
+            <div id="divContent" style="display:none;">
+            </div>
+
+            <!--POPUP DE LOGIN -->
+            <div data-role="popup" data-corners="false" id="popupCart" data-overlay-theme="a" class="" style="min-width:15%;right:2px;top:6%;position:fixed;">
+                <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <ul data-role="listview" data-inset="true" data-theme="b" data-divider-theme="a" data-count-theme="a">
+                    <li data-role="list-divider" style="text-align:left">
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a" style="width:20%">
+                                <img src="css/icons/cesta.png" style="max-width: 50%;">
+                            </div>
+                            <div class="ui-block-b" style="width:80%">
+                                <label id="labelCarrito" style="margin-top: 2%;">Tu carrito</label>
+                            </div>
+                        </div>
+                    </li>
+                    <li onclick="displayPopupItemList()" style="background-color: dodgerblue;">
+                        <div class="ui-grid-a">
+                            <div class="ui-block-a">
+                                <a id="labelItems" style="border-radius: 5px;width: 100%;color: black;">Items</a><span id="spPopupCartCount" class="ui-li-count">0</span>
+                            </div>
+                            <div class="ui-block-b">
+                            </div>
+                        </div>
+                    </li>
+                    <li><span>Total: </span><span id="spPopupTotalAmmount"></span>
+                    </li>
+                    <li>
+                        <center>
+                            <button data-theme="b" data-icon="check" data-iconpos="right" onclick="checkOut()">Checkout</button>
+                        </center>
+                    </li>
+                </ul>
+            </div>
+
+            <!--POPUP DE Carga -->
+            <div data-role="popup" data-corners="false" id="popupCargando" data-overlay-theme="a" data-theme="none" style="background-color: rgb(0, 0, 0);opacity: 0.8;max-width: none;height: 100%;">
+                <center>
+                    <br>
+                    <div>
+                        <img src="css/icons/cargando.gif">
+                    </div>
+                    <label id="labelCargando" style="font-size: 30px; color:white;">Cargando...</label>
+                </center>
+            </div>
+
+            <!--POPUP DE Preview items -->
+            <div data-role="popup" data-corners="false" data-overlay-theme="d" id="popupListItems">
+                <a href="#" data-rel="back" data-role="button" data-theme="b" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <div id="contentPopupListItems"></div>
+            </div>
+
+            <!--POPUP DE SHOW ITEM -->
+            <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupShowItem" class="ui-shadow ui-btn-inline" style="width:600px;">
+                <div id="contentPopupShowItem">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!--POPUP PARA IDIOMAS -->
+            <div data-role="popup" data-corners="false" id="popupIdiomas" class="" style="border: 0px;background-color:#1798d1;right:1%;top:6%;position:fixed;width: 15%;">
+                <div id="contentPopupIdioma"></div>
+            </div>
+
+            <!-- POP DE ARTICULOS -->
+            <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupAction" class="ui-shadow ui-btn-inline" style="min-width:400px;">
+                <div class="ui-bar ui-bar-b" data-theme="b">
+                    <h3>Alerta</h3>
+                    <label id="lbpopupAction" style="display:none"></label>
+                </div>
+                <div class="ui-body ui-body-b">
+                    <center>
+                        <h3>¿Desea eliminar el articulo?</h3>
+                    </center>
+                    <button id="btnPopupActionLeft" onclick='$("#popupAction").popup("close");' data-theme="c" data-icon="delete" data-iconpos="right" style="width:13em; float:left; margin:10px">No</button>
+                    <button id="btnPopupActionRight" onclick='$("#popupAction").popup("close");' data-theme="d" data-icon="check" data-iconpos="right" style="width:13em; float:right; margin:10px">Si</button>
+                </div>
+            </div>
+
+            <!-- POPUP DE LOGIN -->
+            <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupLogin" class="ui-content" style="min-width:250px;">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <form autocomplete="on">
+                    <div id="div_session">
+                        <label id="labelIniciarSession">Iniciar sessión</label>
+                        <label id="labelLoginUsuario">Usuario</label>
+                        <input type="text" name="user" id="usrnm" placeholder="Email" data-clear-btn="true">
+                        <label id="labelLoginContra">Contraseña</label>
+                        <input type="password" name="passw" id="pswd" placeholder="" data-clear-btn="true">
+                        <!--<label for="recordar_session">No cerrar sessión</label>
+                            <input type="checkbox" name="login" id="recordar_session" value="1" data-mini="true">
+                            -->
+                        <button type="button" id="iniciar_session">Iniciar sessión</button>
+                        <center>
+                            <br><a id="registrarse" onclick="displayRegistro();" style="margin:10px;color: green;" class="ui-link">Registrarse</a>
+                        </center>
+                        <center>
+                            <br><a id="olviContra" onclick="displayCambioContra();" style="margin:10px;color: #FF4700;" class="ui-link">¿Has olvidado la contraseña?</a>
+                        </center>
+                    </div>
+                </form>
+            </div>
+
+            <!-- POPUP DE REGISTRO -->
+            <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupRegistro" class="ui-content" style="min-width:250px;">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <div id="div_registrarse">
+                    <form autocomplete="on">
+                        <label id="labelRegistrarse"><strong>
+                             Registrarse </strong>
+                        </label>
+                        <p>
+                            <label id="usernamesignup" class="uname" data-icon="u">Usuario</label>
+                            <input id="emailsignup" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
+                        </p>
+                        <p>
+                            <label id="labelpasswordsignup" class="youpasswd" data-icon="p">Contraseña</label>
+                            <input id="passwordsignup" name="passwordsignup" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
+                        </p>
+                        <p>
+                            <label id="labelpasswordsignup_confirm" class="youpasswd" data-icon="p">Confirmar contraseña</label>
+                            <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="Ej. X8df!90EO" data-clear-btn="true">
+                        </p>
+                        <p>
+                            <label id="labelcodpos" class="youpasswd" data-icon="p">Código postal</label>
+                            <input id="cod_pos" name="" required="required" type="number" placeholder="08041" data-clear-btn="true">
+                        </p>
+                        <p>
+                            <button type="button" id="enviar_registro">Crear cuenta</button>
+                        </p>
+                        <p class="change_link">
+                            <label id="labelYAesClient" class="youpasswd" data-icon="p">¿Ya es cliente?</label>
+                            <a id="linkIniSes" onclick="displayLogin();">Iniciar sessión</a>
+                        </p>
+                    </form>
+                </div>
+                </form>
+            </div>
+
+            <!-- POPUP DE CAMBIO PASSWORD -->
+            <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupCambioContra" class="ui-content" style="min-width:250px;">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <div id="div_cambioContra">
+                    <form>
+                        <label id="tituloCamContra">
+                            <h3>Cambio de contraseña</h3>
+                        </label>
+                        <p>
+                            <label id="labelSuUsuario" class="youpasswd" data-icon="u">Su usuario:</label>
+                            <input id="usuarioCambio" name="emailsignup" required="required" type="email" placeholder="Ej. miemail@mail.com" autofocus data-clear-btn="true">
+                        </p>
+                        <p>
+                            <button type="button" id="cam_contraseña">¡Pedir una nueva contraseña!</button>
+                        </p>
+                        <p>
+                            <button type="button" onclick="displayLogin2();" id="volver">Volver</button>
+                        </p>
+                    </form>
+                </div>
+                </form>
+            </div>
+
+            <!-- POPUP PARA ALERTAS-ERRORES WS -->
+            <div data-role="popup" data-corners="false" data-overlay-theme="a" id="popupAlert" data-rel="back" class="ui-content" style="max-width:280px">
+                <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"></a>
+                <label id="texto_popup"></label>
+            </div>
+
+
+        </div>
+
+        <!--     FOOTER    -->
+        <div data-role="footer" data-position="fixed" data-tap-toggle="false" style="border-style:none;height: 38px;">
+            <!--<img src="css/icons/footer.jpg" style="width: 100vw;height: 38px;">-->
+            <div style="background: url(css/icons/footer.jpg);background-size: 100% 100% !important;">
+                <img src="css/icons/footer.jpg" style="width: 100vw;height: 38px;">
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>
