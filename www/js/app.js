@@ -29,6 +29,10 @@ Esto se ejecuta antes que la app se inicie
 ******************************************/
 $(document).ready(function () {
 
+    window.plugins.PrintPDF.isPrintingAvailable(function (isAvailable) {
+        alert('printing is available: ' + isAvailable);
+    });
+
     $("#popupListItems").bind({
         popupafterclose: function (event, ui) {
 
@@ -258,14 +262,18 @@ $(document).ready(function () {
 
     });
 
-var type = "text/html";
-var title = "test.html";
-var fileContent = "<html>Phonegap Print Plugin</html>";
-//window.plugins.PrintPlugin.print(fileContent,function(){console.log('success')},function(){console.log('fail')},"",type,title);
+    var type = "text/html";
+    var title = "test.html";
+    var fileContent = "<html>Phonegap Print Plugin</html>";
+    //window.plugins.PrintPlugin.print(fileContent,function(){console.log('success')},function(){console.log('fail')},"",type,title);
 
-var PrintPlugin = cordova.require("lib/phonegap-print-master/www/PrintPlugin.js");
+    var PrintPlugin = cordova.require("lib/phonegap-print-master/www/PrintPlugin.js");
 
-PrintPlugin.print(fileContent,function(){console.log('success')},function(){console.log('fail')},"",type,title);
+    PrintPlugin.print(fileContent, function () {
+        console.log('success')
+    }, function () {
+        console.log('fail')
+    }, "", type, title);
 
 });
 
@@ -613,7 +621,7 @@ function addToCartAlter(id_prod_alter, id_produc) {
     var j, i;
 
     for (i = 0; i < PRODUCTS_ALTER.alternativeProducts.length; i++) { //buscamos el producto alternativo
-        
+
         //console.log("");
 
         if (PRODUCTS_ALTER.alternativeProducts[i].id == id_prod_alter) {
@@ -701,14 +709,14 @@ function addToCartAlter(id_prod_alter, id_produc) {
 
             }
         }
-        console.log("Vamos a cambiarlo "+j);
+        console.log("Vamos a cambiarlo " + j);
         console.log(aux_prod);
         var precio_new_art = parseInt(aux_prod.quantity) * parseInt(aux_prod.price_x_region[0].totalPrice);
         CART[j] = aux_prod;
         //displayItemOperations(id_prod_alter, cantidad);
 
     }
-    
+
     refreshDisplayProducts(CART);
 
 }
